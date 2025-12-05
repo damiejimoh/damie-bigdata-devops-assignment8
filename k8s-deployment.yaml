@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bigdata-analytics-deployment
+  labels:
+    app: bigdata-analytics
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bigdata-analytics
+  template:
+    metadata:
+      labels:
+        app: bigdata-analytics
+    spec:
+      containers:
+      - name: analytics-container
+        image: bigdata-analytics:v1
+        imagePullPolicy: Never
+        resources:
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+      restartPolicy: Always
